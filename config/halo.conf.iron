@@ -1,0 +1,111 @@
+hosts:
+- hostname: iron1
+  resources:
+    iron1:
+      kind: llnl/zpool
+      parameters:
+        pool: iron1
+      requires: null
+    iron1/mdt1:
+      kind: llnl/lustre
+      parameters:
+        target: iron1/mdt1
+        type: mdt
+        mountpoint: /mnt/lustre/lobster-MDT0000
+      requires: iron1
+    iron1/mgs:
+      kind: llnl/lustre
+      parameters:
+        mountpoint: /mnt/lustre/MGS
+        type: mgs
+        target: iron1/mgs
+      requires: iron1
+  fence_agent: null
+  fence_parameters: null
+- hostname: iron2
+  resources:
+    iron2/mdt1:
+      kind: llnl/lustre
+      parameters:
+        type: mdt
+        mountpoint: /mnt/lustre/lobster-MDT0001
+        target: iron2/mdt1
+      requires: iron2
+    iron2:
+      kind: llnl/zpool
+      parameters:
+        pool: iron2
+      requires: null
+  fence_agent: null
+  fence_parameters: null
+- hostname: iron3
+  resources:
+    iron3:
+      kind: llnl/zpool
+      parameters:
+        pool: iron3
+      requires: null
+    iron3/ost1:
+      kind: llnl/lustre
+      parameters:
+        target: iron3/ost1
+        type: ost
+        mountpoint: /mnt/lustre/lobster-OST0000
+      requires: iron3
+  fence_agent: null
+  fence_parameters: null
+- hostname: iron4
+  resources:
+    iron4/ost1:
+      kind: llnl/lustre
+      parameters:
+        type: ost
+        target: iron4/ost1
+        mountpoint: /mnt/lustre/lobster-OST0001
+      requires: iron4
+    iron4:
+      kind: llnl/zpool
+      parameters:
+        pool: iron4
+      requires: null
+  fence_agent: null
+  fence_parameters: null
+- hostname: iron5
+  resources:
+    iron5/ost1:
+      kind: llnl/lustre
+      parameters:
+        type: ost
+        mountpoint: /mnt/lustre/lobster-OST0002
+        target: iron5/ost1
+      requires: iron5
+    iron5:
+      kind: llnl/zpool
+      parameters:
+        pool: iron5
+      requires: null
+  fence_agent: null
+  fence_parameters: null
+- hostname: iron6
+  resources:
+    iron6/ost1:
+      kind: llnl/lustre
+      parameters:
+        target: iron6/ost1
+        type: ost
+        mountpoint: /mnt/lustre/lobster-OST0003
+      requires: iron6
+    iron6:
+      kind: llnl/zpool
+      parameters:
+        pool: iron6
+      requires: null
+  fence_agent: null
+  fence_parameters: null
+failover_pairs:
+- - iron1
+  - iron2
+- - iron3
+  - iron4
+- - iron5
+  - iron6
