@@ -28,9 +28,9 @@ LANL software release number: O4905
 cargo build
 
 %install
-install -D -p -m 0755 target/debug/halo %{buildroot}%{_bindir}/halo
-install -D -p -m 0755 target/debug/halo_remote %{buildroot}%{_bindir}/halo_remote
-install -D -p -m 0755 target/debug/halo_manager %{buildroot}%{_bindir}/halo_manager
+install -D -p -m 0755 target/debug/halo %{buildroot}%{_sbindir}/halo
+install -D -p -m 0755 target/debug/halo_remote %{buildroot}%{_sbindir}/halo_remote
+install -D -p -m 0755 target/debug/halo_manager %{buildroot}%{_sbindir}/halo_manager
 
 install -D -p -m 0644 systemd/halo.service %{buildroot}%{_unitdir}/halo.service
 install -D -p -m 0644 systemd/halo-remote.service %{buildroot}%{_unitdir}/halo-remote.service
@@ -47,9 +47,9 @@ cargo test || :
 %files
 %license LICENSE
 %doc README.md
-%{_bindir}/halo
-%{_bindir}/halo_remote
-%{_bindir}/halo_manager
+%{_sbindir}/halo
+%{_sbindir}/halo_remote
+%{_sbindir}/halo_manager
 
 %{_unitdir}/halo.service
 %{_unitdir}/halo-remote.service
